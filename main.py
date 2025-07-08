@@ -1242,3 +1242,19 @@ async def text_handler(bot: Client, m: Message):
 
 
 bot.run()
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+class DummyHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Bot is running")
+
+def run_fake_server():
+    server_address = ("0.0.0.0", 10000)  # Use port 10000 or 8080
+    httpd = HTTPServer(server_address, DummyHandler)
+    httpd.serve_forever()
+
+# Start the dummy server in the background
+threading.Thread(target=run_fake_server, daemon=True).start()
