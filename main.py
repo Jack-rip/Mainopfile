@@ -1242,6 +1242,7 @@ async def text_handler(bot: Client, m: Message):
 
 
 bot.run()
+
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
